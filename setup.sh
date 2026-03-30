@@ -1,16 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
-# Hebrew Voice for Claude Code (macOS)
+# Claude Code Voice (macOS)
 # Requirements: Xcode Command Line Tools only.
 
-INSTALL_DIR="$HOME/.local/share/hebrew-voice"
+INSTALL_DIR="$HOME/.local/share/claude-code-voice"
 
 # If running via curl|bash, clone the repo first
 if [ ! -f "scripts/server.swift" ]; then
-  echo "Downloading hebrew-voice..."
+  echo "Downloading claude-code-voice..."
   rm -rf "$INSTALL_DIR"
-  git clone --depth 1 https://github.com/eladcandroid/claude-code-hebrew-voice.git "$INSTALL_DIR" 2>/dev/null
+  git clone --depth 1 https://github.com/eladcandroid/claude-code-voice.git "$INSTALL_DIR" 2>/dev/null
   cd "$INSTALL_DIR"
 fi
 
@@ -18,7 +18,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SCRIPTS="$SCRIPT_DIR/scripts"
 APP="$SCRIPTS/HebrewVoice.app"
 
-echo "=== Hebrew Voice for Claude Code ==="
+echo "=== Claude Code Voice ==="
 echo ""
 
 # Check Swift is available
@@ -32,7 +32,7 @@ fi
 echo "[1/2] Building..."
 mkdir -p "$APP/Contents/MacOS"
 
-swiftc -O -o "$APP/Contents/MacOS/hebrew-voice" "$SCRIPTS/server.swift" \
+swiftc -O -o "$APP/Contents/MacOS/voice-server" "$SCRIPTS/server.swift" \
   -framework Network -framework Speech -framework Foundation -framework AppKit 2>/dev/null
 
 cat > "$APP/Contents/Info.plist" << 'EOF'
@@ -40,12 +40,12 @@ cat > "$APP/Contents/Info.plist" << 'EOF'
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
     <key>CFBundleIdentifier</key><string>com.hebrew-voice.server</string>
-    <key>CFBundleName</key><string>HebrewVoice</string>
-    <key>CFBundleExecutable</key><string>hebrew-voice</string>
+    <key>CFBundleName</key><string>ClaudeCodeVoice</string>
+    <key>CFBundleExecutable</key><string>voice-server</string>
     <key>CFBundleVersion</key><string>1.0</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>Hebrew voice transcription for Claude Code</string>
+    <string>Voice transcription for Claude Code</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Audio input for speech recognition</string>
 </dict></plist>
@@ -92,7 +92,7 @@ cat > "$PLIST" << EOF
 <plist version="1.0"><dict>
     <key>Label</key><string>com.hebrew-voice.server</string>
     <key>ProgramArguments</key><array>
-        <string>$APP/Contents/MacOS/hebrew-voice</string>
+        <string>$APP/Contents/MacOS/voice-server</string>
     </array>
     <key>RunAtLoad</key><true/>
     <key>KeepAlive</key><true/>
@@ -107,7 +107,9 @@ echo "  Voice server installed and started"
 echo ""
 echo "=== Done ==="
 echo ""
-echo "Restart Claude Code, enable /voice, and speak Hebrew."
+echo "Restart Claude Code, enable /voice, and speak."
+echo "Switch language with /config. Native languages → Anthropic, others → Apple STT."
+echo ""
 echo "First run: macOS will ask for Speech Recognition permission — click Allow."
 echo ""
-echo "Uninstall: curl -fsSL https://raw.githubusercontent.com/eladcandroid/claude-code-hebrew-voice/main/uninstall.sh | bash"
+echo "Uninstall: curl -fsSL https://raw.githubusercontent.com/eladcandroid/claude-code-voice/main/uninstall.sh | bash"

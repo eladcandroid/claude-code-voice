@@ -1,20 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "=== Uninstalling Hebrew Voice for Claude Code ==="
+echo "=== Uninstalling Claude Code Voice ==="
 echo ""
 
-# 1. Stop and remove launch agent
-PLIST="$HOME/Library/LaunchAgents/com.hebrew-voice.server.plist"
-if [ -f "$PLIST" ]; then
-  launchctl unload "$PLIST" 2>/dev/null || true
-  rm -f "$PLIST"
-  echo "[✓] Removed voice server launch agent"
-else
-  echo "[–] No launch agent found"
-fi
+# 1. Stop and remove launch agent (check both old and new names)
+for name in com.hebrew-voice.server com.hebrew-voice.server; do
+  PLIST="$HOME/Library/LaunchAgents/$name.plist"
+  if [ -f "$PLIST" ]; then
+    launchctl unload "$PLIST" 2>/dev/null || true
+    rm -f "$PLIST"
+    echo "[✓] Removed $name launch agent"
+  fi
+done
 
 # 2. Kill any running voice server
+pkill -f "voice-server" 2>/dev/null || true
 pkill -f "hebrew-voice" 2>/dev/null || true
 pkill -f "HebrewVoice" 2>/dev/null || true
 echo "[✓] Stopped voice server"
@@ -38,14 +39,16 @@ fi
 
 # 4. Reset Speech Recognition permission
 tccutil reset SpeechRecognition com.hebrew-voice.server 2>/dev/null || true
+tccutil reset SpeechRecognition com.hebrew-voice.server 2>/dev/null || true
 echo "[✓] Reset Speech Recognition permission"
 
-# 5. Remove install directory (if installed via curl|bash)
-INSTALL_DIR="$HOME/.local/share/hebrew-voice"
-if [ -d "$INSTALL_DIR" ]; then
-  rm -rf "$INSTALL_DIR"
-  echo "[✓] Removed $INSTALL_DIR"
-fi
+# 5. Remove install directories
+for dir in "$HOME/.local/share/claude-code-voice" "$HOME/.local/share/hebrew-voice"; do
+  if [ -d "$dir" ]; then
+    rm -rf "$dir"
+    echo "[✓] Removed $dir"
+  fi
+done
 
 echo ""
 echo "=== Uninstall complete ==="
