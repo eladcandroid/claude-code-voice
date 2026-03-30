@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.png" alt="Claude Code Voice" width="400">
+</p>
+
 # Claude Code Voice (macOS)
 
 Adds native on-device speech-to-text to Claude Code's `/voice` command using Apple's `SFSpeechRecognizer`. Natively supported languages proxy to Anthropic's server; unsupported languages (Hebrew, Arabic, etc.) transcribe locally via Apple STT. No API keys, no binary patching — survives Claude Code updates.
