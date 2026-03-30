@@ -5,7 +5,7 @@ echo "=== Uninstalling Claude Code Voice ==="
 echo ""
 
 # 1. Stop and remove launch agent (check both old and new names)
-for name in com.hebrew-voice.server com.hebrew-voice.server; do
+for name in com.claude-code-voice.server com.claude-code-voice.server; do
   PLIST="$HOME/Library/LaunchAgents/$name.plist"
   if [ -f "$PLIST" ]; then
     launchctl unload "$PLIST" 2>/dev/null || true
@@ -38,8 +38,8 @@ else
 fi
 
 # 4. Reset Speech Recognition permission
-tccutil reset SpeechRecognition com.hebrew-voice.server 2>/dev/null || true
-tccutil reset SpeechRecognition com.hebrew-voice.server 2>/dev/null || true
+tccutil reset SpeechRecognition com.claude-code-voice.server 2>/dev/null || true
+tccutil reset SpeechRecognition com.claude-code-voice.server 2>/dev/null || true
 echo "[✓] Reset Speech Recognition permission"
 
 # 5. Remove install directories

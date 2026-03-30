@@ -39,7 +39,7 @@ cat > "$APP/Contents/Info.plist" << 'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-    <key>CFBundleIdentifier</key><string>com.hebrew-voice.server</string>
+    <key>CFBundleIdentifier</key><string>com.claude-code-voice.server</string>
     <key>CFBundleName</key><string>ClaudeCodeVoice</string>
     <key>CFBundleExecutable</key><string>voice-server</string>
     <key>CFBundleVersion</key><string>1.0</string>
@@ -82,7 +82,7 @@ print("  Updated settings.json")
 PYEOF
 
 # Install launch agent
-PLIST="$HOME/Library/LaunchAgents/com.hebrew-voice.server.plist"
+PLIST="$HOME/Library/LaunchAgents/com.claude-code-voice.server.plist"
 launchctl unload "$PLIST" 2>/dev/null || true
 mkdir -p "$HOME/Library/LaunchAgents"
 
@@ -90,7 +90,7 @@ cat > "$PLIST" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-    <key>Label</key><string>com.hebrew-voice.server</string>
+    <key>Label</key><string>com.claude-code-voice.server</string>
     <key>ProgramArguments</key><array>
         <string>$APP/Contents/MacOS/voice-server</string>
     </array>

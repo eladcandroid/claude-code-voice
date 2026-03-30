@@ -5,17 +5,7 @@
 	<key>files</key>
 	<dict/>
 	<key>files2</key>
-	<dict>
-		<key>MacOS/hebrew-voice</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			LgzzKOQUjHwojUc4ddKlPAmZ2bI=
-			</data>
-			<key>requirement</key>
-			<string>cdhash H"2e0cf328e4148c7c288d473875d2a53c0999d9b2"</string>
-		</dict>
-	</dict>
+	<dict/>
 	<key>rules</key>
 	<dict>
 		<key>^Resources/</key>
