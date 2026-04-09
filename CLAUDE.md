@@ -20,4 +20,4 @@ curl -fsSL https://raw.githubusercontent.com/eladcandroid/claude-code-voice/main
 
 ## Supported languages
 
-en, he, es, fr, de, ja, ko, pt, it, ru, zh, ar, hi, tr, nl, pl, uk, el, cs, da, sv, no — and any other language Apple's SFSpeechRecognizer supports.
+en, he, es, fr, de, ja, ko, pt, it, ru, zh, zh-hk, ar, hi, tr, nl, pl, uk, el, cs, da, sv, no — and any other language Apple's SFSpeechRecognizer supports.
