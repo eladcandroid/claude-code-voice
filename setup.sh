@@ -10,7 +10,7 @@ INSTALL_DIR="$HOME/.local/share/claude-code-voice"
 if [ ! -f "scripts/server.swift" ]; then
   echo "Downloading claude-code-voice..."
   rm -rf "$INSTALL_DIR"
-  git clone --depth 1 https://github.com/eladcandroid/claude-code-voice.git "$INSTALL_DIR" 2>/dev/null
+  git clone --depth 1 https://github.com/dr-data/claude-code-voice.git "$INSTALL_DIR" 2>/dev/null
   cd "$INSTALL_DIR"
 fi
 
@@ -120,4 +120,4 @@ echo "Supported /config language codes:"
 echo "  en, es, fr, de, ja, ko, pt, it, ru, hi, id, pl, tr, nl, uk, el, cs, da, sv, no, he, ar, zh, zh-hk"
 echo "  plus any language supported by Apple SFSpeechRecognizer"
 echo ""
-echo "Uninstall: curl -fsSL https://raw.githubusercontent.com/eladcandroid/claude-code-voice/main/uninstall.sh | bash"
+echo "Uninstall: curl -fsSL https://raw.githubusercontent.com/dr-data/claude-code-voice/main/uninstall.sh | bash"
