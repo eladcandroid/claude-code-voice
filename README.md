@@ -65,10 +65,20 @@ Type `/config` in Claude Code to change the language. The voice server picks it 
 | Norwegian | `no` | Anthropic |
 | **Hebrew** | `he` | Apple STT |
 | **Arabic** | `ar` | Apple STT |
-| **Chinese** | `zh` | Apple STT |
-| **Cantonese (Hong Kong)** | `zh-hk` | Apple STT |
+| **Chinese (Mandarin)** | `zh` | Apple STT |
+| **Cantonese (Hong Kong)** | `yue` or `zh-hk` | Apple STT |
 
 Any language supported by Apple's `SFSpeechRecognizer` works — the 20 natively supported languages are proxied to Anthropic's server for best quality.
+
+### Cantonese setup
+
+1. In Claude Code, run `/config` and set the language to `yue` (or `zh-hk`, `cantonese`, `廣東話`, `粵語` — all work).
+2. Download the Cantonese speech model on macOS so Apple STT can work offline:
+   - **System Settings → Keyboard → Dictation**
+   - Enable **Dictation**, then open the **Language** dropdown
+   - Click **Add Language…** and select **Chinese (Cantonese)**
+   - macOS will download the on-device model (~100–200 MB)
+3. Once downloaded, restart Claude Code and hold **Space** to speak in Cantonese — transcription runs fully on-device.
 
 ## Token usage and local processing
 
