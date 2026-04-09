@@ -15,6 +15,11 @@ if [ ! -f "scripts/server.swift" ]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Detect GitHub username from this repo's git remote so forked copies display correct URLs
+_REMOTE_URL=$(git -C "$SCRIPT_DIR" remote get-url origin 2>/dev/null || echo "")
+_GITHUB_USER=$(echo "$_REMOTE_URL" | sed -E 's|.*github\.com[:/]([^/]+)/.*|\1|')
+_GITHUB_USER="${_GITHUB_USER:-dr-data}"
 SCRIPTS="$SCRIPT_DIR/scripts"
 APP="$SCRIPTS/VoiceServer.app"
 
@@ -120,4 +125,4 @@ echo "Supported /config language codes:"
 echo "  en, es, fr, de, ja, ko, pt, it, ru, hi, id, pl, tr, nl, uk, el, cs, da, sv, no, he, ar, zh, zh-hk"
 echo "  plus any language supported by Apple SFSpeechRecognizer"
 echo ""
-echo "Uninstall: curl -fsSL https://raw.githubusercontent.com/dr-data/claude-code-voice/main/uninstall.sh | bash"
+echo "Uninstall: curl -fsSL https://raw.githubusercontent.com/$_GITHUB_USER/claude-code-voice/main/uninstall.sh | bash"

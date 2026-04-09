@@ -4,6 +4,12 @@ set -euo pipefail
 echo "=== Uninstalling Claude Code Voice ==="
 echo ""
 
+# Detect GitHub username from the installed repo before we remove it
+_INSTALL_DIR="$HOME/.local/share/claude-code-voice"
+_REMOTE_URL=$(git -C "$_INSTALL_DIR" remote get-url origin 2>/dev/null || echo "")
+_GITHUB_USER=$(echo "$_REMOTE_URL" | sed -E 's|.*github\.com[:/]([^/]+)/.*|\1|')
+_GITHUB_USER="${_GITHUB_USER:-dr-data}"
+
 # 1. Stop and remove launch agents (current + legacy names)
 for name in com.claude-code-voice com.claude-code-voice.server com.hebrew-voice.server; do
   PLIST="$HOME/Library/LaunchAgents/$name.plist"
@@ -52,3 +58,4 @@ done
 echo ""
 echo "=== Uninstall complete ==="
 echo "Restart Claude Code for changes to take effect."
+echo "Reinstall: curl -fsSL https://raw.githubusercontent.com/$_GITHUB_USER/claude-code-voice/main/setup.sh | bash"
